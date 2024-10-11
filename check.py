@@ -234,7 +234,7 @@ class Service(BaseValidator):
         return self._checker.info
 
     def _run_dc(self, *args):
-        cmd = ['docker-compose', '-f', str(self._dc_path)] + list(args)
+        cmd = ['docker', 'compose', '-f', str(self._dc_path)] + list(args)
         subprocess.run(cmd, check=True)
 
     def up(self):
@@ -304,7 +304,7 @@ class StructureValidator(BaseValidator):
             for opt in DC_REQUIRED_OPTIONS:
                 if self._error(opt in dc, f'required option {opt} not in {path}'):
                     return
-                  
+
             for opt in dc:
                 self._error(
                     opt in DC_ALLOWED_OPTIONS,
